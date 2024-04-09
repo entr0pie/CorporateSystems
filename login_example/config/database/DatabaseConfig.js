@@ -1,11 +1,12 @@
+import { env } from '../env/EnvConfiguration.js';
 import { Sequelize } from 'sequelize';
 
 const config = {
-  database: process.env.DATABASE_NAME,
-  username: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
+  database: env.DATABASE_NAME,
+  username: env.DATABASE_USERNAME,
+  password: env.DATABASE_PASSWORD,
   options: {
-    host: process.env.DATABASE_HOST,
+    host: env.DATABASE_HOST,
     dialect: 'mysql'
   }
 };
