@@ -31,4 +31,18 @@ export class UserService {
             password: password,
         });
     }
+
+    async login(email, password) {
+        const user = await this.userModel.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if (user && user.password == password) {
+            return user.email;
+        };
+
+        throw new Error("Invalid Password");
+    }
 }

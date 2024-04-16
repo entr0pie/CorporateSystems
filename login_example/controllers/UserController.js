@@ -19,4 +19,19 @@ export class UserController {
             return res.status(403).send();
         }
     }
+
+    async login(req, res) {
+        const { email, password } = req.body;
+
+        try {
+            const token = await this.userService.login(email, password);
+            const responseBody = {
+                access_token: token
+            };
+
+            return res.send(responseBody);
+        } catch (e) {
+            return res.status(403).send();
+        }
+    }
 }

@@ -1,9 +1,10 @@
 
 import { Router } from 'express';
-import { c } from '../container/DependencyContainer'; 
+import { c } from '../container/DependencyContainer.js'; 
 
 const userRouter = Router();
 
-userRouter.post("/user", c.UserController.register.bind(c.UserController));
+userRouter.post("", c.UserController.register.bind(c.UserController));
+userRouter.post("/login", c.UserController.login.bind(c.UserController));
 
 export const UserRouter = userRouter;
