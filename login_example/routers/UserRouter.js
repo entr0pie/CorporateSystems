@@ -1,13 +1,9 @@
 
 import { Router } from 'express';
-import { UserModel } from '../models/UserModel.js';
-import { UserService } from '../services/UserService.js';
-import { UserController } from '../controllers/UserController.js';
+import { c } from '../container/DependencyContainer'; 
 
 const userRouter = Router();
-const userService = new UserService(UserModel);
-const userController = new UserController(userService); 
 
-userRouter.post("", userController.register.bind(userController));
+userRouter.post("/user", c.UserController.register.bind(c.UserController));
 
 export const UserRouter = userRouter;
