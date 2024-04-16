@@ -1,16 +1,14 @@
-import 'dotenv/config';
 import express from 'express';
 import { syncDatabaseModels } from './config/database/DatabaseSync.js';
+import { UserRouter } from './routers/UserRouter.js';
 
 const app = express();
 
+app.use(express.json());
+
 syncDatabaseModels();
 
-app.get("/health", (req, res) => {
-  res.json({
-    "status": "UP"
-  });
-});
+app.use("/user", UserRouter);
 
 app.listen(8080, () => {
   console.log("Started server at http://localhost:8080");
