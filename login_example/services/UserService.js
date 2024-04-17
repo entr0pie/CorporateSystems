@@ -45,4 +45,8 @@ export class UserService {
 
         throw new Error("Invalid Password");
     }
+
+    async findByID(id) {
+        return await this.userModel.findByPk(id);
+    }
 }

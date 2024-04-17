@@ -34,4 +34,14 @@ export class UserController {
             return res.status(403).send();
         }
     }
+
+    async findByID(req, res) {
+        const { id } = req.query;
+        try {
+            const user = await this.userService.findByID(id);
+            return res.send(user);
+        } catch (e) {
+            return res.status(404).send();
+        }
+    }
 }
