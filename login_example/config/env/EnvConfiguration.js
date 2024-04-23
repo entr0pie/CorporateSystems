@@ -6,6 +6,7 @@ const envSchema = z.object({
     DATABASE_USERNAME: z.string(),
     DATABASE_PASSWORD: z.string(),
     DATABASE_HOST: z.string(),
+    BCRYPT_SALT_ROUNDS: z.preprocess(x => parseInt(x), z.number().nonnegative()),
 });
 
 export const env = envSchema.parse(process.env);

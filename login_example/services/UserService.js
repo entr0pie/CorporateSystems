@@ -1,12 +1,15 @@
 import { UserModel } from '../models/UserModel.js';
+import { PasswordManager } from '../security/passwords/PasswordManager.js'
 
 export class UserService {
 
     /**
      * @param {UserModel} userModel 
+     * @param {PasswordManager} passwordManager
      */
-    constructor(userModel) {
+    constructor(userModel, passwordManager) {
         this.userModel = userModel;
+        this.passwordManager = passwordManager;
     }
 
     /**
@@ -26,9 +29,11 @@ export class UserService {
             throw new Error("User Already Registered");
         }
 
+        const hashedPassword = await this.passwordManager.encrypt(password);
+
         return await this.userModel.create({
             email: email,
-            password: password,
+            password: hashedPassword,
         });
     }
 }
