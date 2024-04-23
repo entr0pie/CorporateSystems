@@ -1,12 +1,10 @@
 
 import { Router } from 'express';
-import { UserModel } from '../models/UserModel.js';
-import { UserService } from '../services/UserService.js';
+import { ioc } from '../ioc/container.js';
 import { UserController } from '../controllers/UserController.js';
 
 const userRouter = Router();
-const userService = new UserService(UserModel);
-const userController = new UserController(userService); 
+const userController = new UserController(ioc.UserService); 
 
 userRouter.post("", userController.register.bind(userController));
 
