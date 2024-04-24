@@ -7,5 +7,6 @@ const userRouter = Router();
 const userController = new UserController(ioc.UserService); 
 
 userRouter.post("", userController.register.bind(userController));
+userRouter.post("/login", userController.login.bind(userController));
 
 export const UserRouter = userRouter;
