@@ -1,4 +1,4 @@
-import { ioc } from "../../../ioc/container";
+import { ioc } from "../../../ioc/container.js";
 
 /**
  * Creates a Authentication Filter for the required roles
@@ -7,18 +7,18 @@ import { ioc } from "../../../ioc/container";
  * @returns express middleware
  */
 export function AuthenticationFilter(requiresRoles) {
-  return (req, res, next) => {
-    const token = req.headers["authorization"];
+  return async (req, res, next) => {
+    const token = req.headers["authorization"].split(' ')[1];
 
     if (!token) {
       return res.status(403).send();
     }
 
     try {
-      const validAuthentication = ioc.AuthenticationManager.validate(token);
+      const validAuthentication = await ioc.AuthenticationManager.validate(token);
 
       if (!requiresRoles || requiresRoles.length == 0) {
-        req.authentication = validAuthentication;
+        req.auth = validAuthentication;
         return next();
       }
 
@@ -28,7 +28,7 @@ export function AuthenticationFilter(requiresRoles) {
         }
       }
 
-      req.authentication = validAuthentication;
+      req.auth = validAuthentication;
       return next();
     } catch (e) {
       return res.status(403).send();

@@ -30,4 +30,9 @@ export class UserController {
             return res.status(403).send();
         }
     }
+
+    async protected(req, res) {
+        const subject = req.auth.getSubject();
+        return res.send(`Hello! Your email is ${subject}`)
+    }
 }
