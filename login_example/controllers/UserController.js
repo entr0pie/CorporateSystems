@@ -31,8 +31,17 @@ export class UserController {
         }
     }
 
-    async protected(req, res) {
-        const subject = req.auth.getSubject();
-        return res.send(`Hello! Your email is ${subject}`)
+    async getAllUsers(req, res) {
+        const page = parseInt(req.query.page);
+        const size = parseInt(req.query.size);
+
+        const users = (await this.userService.findAllUsers(page, size)).map((userModel) => {
+            return {
+                id: userModel.id,
+                email: userModel.email,
+            }; 
+        });
+
+        return res.json(users);
     }
 }

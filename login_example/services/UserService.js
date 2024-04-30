@@ -57,4 +57,15 @@ export class UserService {
         
         return this.authenticationManager.create(email, []);
     }
+
+    /**
+     * Find all users in the database 
+     * 
+     * @param {number} page page number 
+     * @param {number} size size of each page
+     */
+    async findAllUsers(page, size) {
+        const offset = page * size;
+        return await this.userModel.findAll({limit: size, offset: offset});
+    }
 }
