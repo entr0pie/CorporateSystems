@@ -10,9 +10,9 @@ export class DepositController {
     }
 
     async create(req, res) {
-        const { name } = req.body;
+        const { name, isActive } = req.body;
         try {
-            const deposit = await this.depositService.create(name);
+            const deposit = await this.depositService.create(name, isActive);
             return res.json(deposit);
         } catch (e) {
             console.error("Error creating deposit: ", e);
@@ -22,10 +22,10 @@ export class DepositController {
 
     async update(req, res) {
         const id = parseInt(req.params.id);
-        const { name } = req.body;
+        const { name, isActive } = req.body;
 
         try {
-            const deposit = await this.depositService.update(id, name);
+            const deposit = await this.depositService.update(id, name, isActive);
             return res.json(deposit);
         } catch (e) {
             console.error("Error updating deposit: ", e);

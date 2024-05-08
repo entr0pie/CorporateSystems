@@ -17,4 +17,10 @@ export const ProductModel = sequelize.define('Product', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 });

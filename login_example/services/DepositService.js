@@ -11,16 +11,18 @@ export class DepositService {
 
     /**
      * @param {string} name 
+     * @param {boolean?} isActive
      */
-    async create(name) {
-        return await this.depositModel.create({ name: name });
+    async create(name, isActive) {
+        return await this.depositModel.create({ name: name, isActive: isActive });
     }
 
     /**
      * @param {number} id 
-     * @param {string} name ser
+     * @param {string} name
+     * @param {boolean?} isActive
      */
-    async update(id, name) {
+    async update(id, name, isActive) {
         const deposit = await this.depositModel.findByPk(id);
 
         if (!deposit) {
@@ -29,6 +31,7 @@ export class DepositService {
 
         deposit.set({
             name: name,
+            isActive: isActive
         });
 
         return await deposit.save();

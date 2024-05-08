@@ -22,10 +22,10 @@ export class ProductController {
     }
 
     async create(req, res) {
-        const { name, description } = req.body;
+        const { name, description, isActive } = req.body;
 
         try {
-            const product = await this.productService.create(name, description);
+            const product = await this.productService.create(name, description, isActive);
             return res.json(product);
         } catch (e) {
             return res.status(500).send(e);
@@ -34,10 +34,10 @@ export class ProductController {
 
     async update(req, res) {
         const id = parseInt(req.params.id);
-        const { name, description } = req.body;
+        const { name, description, isActive } = req.body;
 
         try {
-            const product = await this.productService.update(id, name, description);
+            const product = await this.productService.update(id, name, description, isActive);
             return res.json(product);
         } catch (e) {
             return res.status(500).send(e);

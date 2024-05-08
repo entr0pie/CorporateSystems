@@ -12,4 +12,10 @@ export const DepositModel = sequelize.define('Deposit', {
         type: DataTypes.STRING,
         unique: true,
     },
+
+    isActive: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false
+    }
 });

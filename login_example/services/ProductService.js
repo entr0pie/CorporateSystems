@@ -19,20 +19,23 @@ export class ProductService {
     /**
      * @param {string} name 
      * @param {string} description 
+     * @param {boolean} isActive
      */
-    async create(name, description) {
+    async create(name, description, isActive) {        
         return await this.productModel.create({
             name: name,
             description: description,
+            isActive: isActive
         });
     }
     
     /**
      * @param {number} id
      * @param {string} name 
-     * @param {string} description 
+     * @param {string} description
+     * @param {boolean} isActive
      */
-    async update(id, name, description) {
+    async update(id, name, description, isActive) {
         const product = await this.productModel.findByPk(id);
         
         if (!product) {
@@ -41,7 +44,8 @@ export class ProductService {
 
         product.set({
             name: name,
-            description: description
+            description: description,
+            isActive: isActive
         });
 
         return await product.save();
