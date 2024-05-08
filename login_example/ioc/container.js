@@ -10,12 +10,15 @@ import { UserService } from "../services/UserService.js";
 import { AuthenticationFilter } from "../security/authentication/filters/AuthenticationFilter.js"
 import { DepositService } from "../services/DepositService.js";
 import { DepositModel } from "../models/DepositModel.js";
+import { ProductMovementService } from "../services/ProductMovementService.js";
+import { ProductMovementModel } from "../models/ProductMovementModel.js";
 
 const passwordManager = new BcryptPasswordManager(env.BCRYPT_SALT_ROUNDS);
 const authenticationManager = new JwtManager(env.JWT_SECRET);
 const userService = new UserService(UserModel, passwordManager, authenticationManager);
 const productService = new ProductService(ProductModel);
 const depositService = new DepositService(DepositModel);
+const productMovementService = new ProductMovementService(ProductMovementModel);
 
 const container = {
     /**
@@ -42,6 +45,8 @@ const container = {
      * @type {DepositService}
      */
     DepositService: depositService,
+
+    ProductMovementService: productMovementService,
 
     filters: {
         Authenticated: AuthenticationFilter(),
