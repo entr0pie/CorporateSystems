@@ -1,4 +1,6 @@
-import { ProductMovementModel } from "../models/ProductMovementModel";
+import { Op } from 'sequelize';
+import { DepositModel } from '../models/DepositModel.js';
+import { ProductModel } from '../models/ProductModel.js';
 
 export class ProductMovementService {
     /**
@@ -27,6 +29,22 @@ export class ProductMovementService {
         });
     }
 
+    /**
+    * @param {number} id 
+    */
+    async findById(id) {
+        return await this.productMovementModel.findByPk(id);
+    }
+
+    /**
+    * @param {number} page 
+    * @param {number} size 
+    */
+    async findAll(page, size) {
+        const offset = page * size;
+        return await this.productMovementModel.findAll({ limit: size, offset: offset });
+    }
+
     /** 
      * @param {number} productId 
      * @param {number} page 
@@ -34,7 +52,7 @@ export class ProductMovementService {
      */
     async findByProductId(productId, page, size) {
         const offset = page * size;
-        return await this.productMovementModel.findAll({where: { productId: productId }, limit: size, offset: offset});
+        return await this.productMovementModel.findAll({ where: { productId: productId }, limit: size, offset: offset });
     }
 
     /**
@@ -44,7 +62,7 @@ export class ProductMovementService {
      */
     async findByDepositId(depositId, page, size) {
         const offset = page * size;
-        return await this.productMovementModel.findAll({where: { depositId: depositId }, limit: size, offset: offset});
+        return await this.productMovementModel.findAll({ where: { depositId: depositId }, limit: size, offset: offset });
     }
 
     /**

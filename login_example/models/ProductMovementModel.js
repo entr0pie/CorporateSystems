@@ -1,7 +1,7 @@
 import { sequelize } from '../config/database/DatabaseConfig.js';
 import { DataTypes } from 'sequelize';
-import { DepositModel } from '../models/DepositModel.js';
-import { ProductModel } from '../models/ProductModel.js';
+import { DepositModel } from './DepositModel.js';
+import { ProductModel } from './ProductModel.js';
 
 export const ProductMovementModel = sequelize.define("ProductMovement", {
     id: {
