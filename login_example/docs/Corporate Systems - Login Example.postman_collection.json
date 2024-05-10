@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "12d43bfe-3495-4c0b-968f-72c8ebea7db7",
+		"_postman_id": "ab830e48-5c80-4873-b7a6-eb7d99d4c9a2",
 		"name": "Corporate Systems | Login Example",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "29352096"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27995767"
 	},
 	"item": [
 		{
@@ -40,7 +40,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/user/login"
+						"url": {
+							"raw": "http://localhost:8080/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
@@ -61,7 +72,18 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/user/register"
+						"url": {
+							"raw": "http://localhost:8080/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"register"
+							]
+						}
 					},
 					"response": []
 				}
@@ -84,7 +106,17 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/product"
+						"url": {
+							"raw": "http://localhost:8080/product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
 					},
 					"response": []
 				},
@@ -187,14 +219,24 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Osório\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Ecoville\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "http://localhost:8080/deposit"
+						"url": {
+							"raw": "http://localhost:8080/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"deposit"
+							]
+						}
 					},
 					"response": []
 				},
@@ -205,7 +247,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Ecoville\",\r\n    \"isActive\": false\r\n}",
+							"raw": "{\r\n    \"name\": \"Santos Andrade\",\r\n    \"isActive\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -265,7 +307,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/deposit?page=0&size=0",
+							"raw": "http://localhost:8080/deposit?page=0&size=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -281,7 +323,207 @@
 								},
 								{
 									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product-movement",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"depositId\": 1,\r\n    \"productId\": 2,\r\n    \"movementType\": \"IN\",\r\n    \"quantity\": 10,\r\n    \"unitaryPrice\": 20.0,\r\n    \"date\": \"2024-05-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/product-movement",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product-movement/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product-movement?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement"
+							],
+							"query": [
+								{
+									"key": "page",
 									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by product id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product-movement/product/:id?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement",
+								"product",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by deposit id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product-movement/deposit/:id?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement",
+								"deposit",
+								":id"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find by date interval",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/product-movement/date?startDate=2024-05-20&endDate=2024-05-24&page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product-movement",
+								"date"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-05-20"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-05-24"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
 								}
 							]
 						}
@@ -293,9 +535,13 @@
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": {
-			"token": "{{access_token}}"
-		}
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
 	},
 	"event": [
 		{
