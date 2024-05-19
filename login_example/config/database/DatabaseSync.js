@@ -2,8 +2,10 @@ import { ProductModel } from '../../models/ProductModel.js';
 import { UserModel } from '../../models/UserModel.js';
 import { DepositModel } from '../../models/DepositModel.js'
 import { ProductMovementModel } from '../../models/ProductMovementModel.js';
+import { DepartmentModel } from '../../models/DepartmentModel.js';
 
 export async function syncDatabaseModels() {
+  await DepartmentModel.sync();
   await UserModel.sync();
   await ProductModel.sync();
   await DepositModel.sync();
