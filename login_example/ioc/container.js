@@ -12,6 +12,8 @@ import { DepositService } from "../services/DepositService.js";
 import { DepositModel } from "../models/DepositModel.js";
 import { ProductMovementService } from "../services/ProductMovementService.js";
 import { ProductMovementModel } from "../models/ProductMovementModel.js";
+import { DepartmentService } from "../services/DepartmentService.js";
+import { DepartmentModel } from "../models/DepartmentModel.js";
 
 const passwordManager = new BcryptPasswordManager(env.BCRYPT_SALT_ROUNDS);
 const authenticationManager = new JwtManager(env.JWT_SECRET);
@@ -19,13 +21,14 @@ const userService = new UserService(UserModel, passwordManager, authenticationMa
 const productService = new ProductService(ProductModel);
 const depositService = new DepositService(DepositModel);
 const productMovementService = new ProductMovementService(ProductMovementModel);
+const departmentService = new DepartmentService(DepartmentModel);
 
 const container = {
     /**
      * @type {UserService}
      */
     UserService: userService,
-    
+
     /**
      * @type {PasswordManager}
      */
@@ -46,7 +49,16 @@ const container = {
      */
     DepositService: depositService,
 
+
+    /**
+     * @type {ProductMovementService}
+     */
     ProductMovementService: productMovementService,
+
+    /**
+     * @type {DepartmentService}
+     */
+    DepartmentService: departmentService,
 
     filters: {
         Authenticated: AuthenticationFilter(),

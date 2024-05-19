@@ -4,7 +4,7 @@ import { ioc } from '../ioc/container.js';
 import { DepositController } from '../controllers/DepositController.js'
 
 const depositRouter = Router();
-const depositController = new DepositController(ioc.DepositService); 
+const depositController = new DepositController(ioc.DepositService);
 
 depositRouter.post("", ioc.filters.Authenticated, depositController.create.bind(depositController));
 depositRouter.put("/:id", ioc.filters.Authenticated, depositController.update.bind(depositController));

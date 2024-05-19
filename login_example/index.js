@@ -4,6 +4,7 @@ import { DepositRouter } from './routers/DepositRouter.js';
 import { ProductMovementRouter } from './routers/ProductMovementRouter.js';
 import { ProductRouter } from './routers/ProductRouter.js';
 import { UserRouter } from './routers/UserRouter.js';
+import { DepartmentRouter } from './routers/DepartmentRouter.js';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use("/user", UserRouter);
 app.use("/product", ProductRouter);
 app.use("/deposit", DepositRouter);
 app.use("/product-movement", ProductMovementRouter);
+app.use("/department", DepartmentRouter);
 
 app.listen(8080, () => {
   console.log("Started server at http://localhost:8080");

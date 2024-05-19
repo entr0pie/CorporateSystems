@@ -10,10 +10,10 @@ export class UserController {
     }
 
     async register(req, res) {
-        const { email, password } = req.body;
-        
+        const { email, password, departmentId } = req.body;
+
         try {
-            const createdUser = await this.userService.create(email, password);
+            const createdUser = await this.userService.create(email, password, departmentId);
             return res.status(204).send();
         } catch (e) {
             return res.status(403).send();
@@ -39,7 +39,7 @@ export class UserController {
             return {
                 id: userModel.id,
                 email: userModel.email,
-            }; 
+            };
         });
 
         return res.json(users);

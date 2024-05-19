@@ -17,5 +17,10 @@ export const UserModel = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+
+  departmentId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
 });
 

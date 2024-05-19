@@ -20,8 +20,9 @@ export class UserService {
      * 
      * @param {string} email 
      * @param {string} password 
+     * @param {number} departmentId
      */
-    async create(email, password) {
+    async create(email, password, departmentId) {
         const foundUser = await this.userModel.findOne({
             where: {
                 email: email,
@@ -37,6 +38,7 @@ export class UserService {
         return await this.userModel.create({
             email: email,
             password: hashedPassword,
+            departmentId: departmentId
         });
     }
 
@@ -54,7 +56,7 @@ export class UserService {
         if (!this.passwordManager.verify(password, foundUser.password)) {
             throw new Error("Invalid password");
         }
-        
+
         return this.authenticationManager.create(email, []);
     }
 
@@ -66,6 +68,6 @@ export class UserService {
      */
     async findAllUsers(page, size) {
         const offset = page * size;
-        return await this.userModel.findAll({limit: size, offset: offset});
+        return await this.userModel.findAll({ limit: size, offset: offset });
     }
 }
