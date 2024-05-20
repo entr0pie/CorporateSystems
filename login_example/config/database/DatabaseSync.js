@@ -3,6 +3,7 @@ import { UserModel } from '../../models/UserModel.js';
 import { DepositModel } from '../../models/DepositModel.js'
 import { ProductMovementModel } from '../../models/ProductMovementModel.js';
 import { DepartmentModel } from '../../models/DepartmentModel.js';
+import { SuplierModel } from '../../models/SuplierModel.js';
 
 export async function syncDatabaseModels() {
   await DepartmentModel.sync();
@@ -10,4 +11,5 @@ export async function syncDatabaseModels() {
   await ProductModel.sync();
   await DepositModel.sync();
   await ProductMovementModel.sync();
+  await SuplierModel.sync();
 }

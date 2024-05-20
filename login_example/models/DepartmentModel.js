@@ -15,5 +15,5 @@ export const DepartmentModel = sequelize.define('Department', {
     },
 });
 
-UserModel.belongsTo(DepartmentModel);
+UserModel.belongsTo(DepartmentModel, { foreignKey: 'DepartmentId' });
 DepartmentModel.hasMany(UserModel);

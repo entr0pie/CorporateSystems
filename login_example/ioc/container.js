@@ -14,6 +14,8 @@ import { ProductMovementService } from "../services/ProductMovementService.js";
 import { ProductMovementModel } from "../models/ProductMovementModel.js";
 import { DepartmentService } from "../services/DepartmentService.js";
 import { DepartmentModel } from "../models/DepartmentModel.js";
+import { SuplierModel } from "../models/SuplierModel.js";
+import { SuplierService } from "../services/SuplierService.js";
 
 const passwordManager = new BcryptPasswordManager(env.BCRYPT_SALT_ROUNDS);
 const authenticationManager = new JwtManager(env.JWT_SECRET);
@@ -22,6 +24,7 @@ const productService = new ProductService(ProductModel);
 const depositService = new DepositService(DepositModel);
 const productMovementService = new ProductMovementService(ProductMovementModel);
 const departmentService = new DepartmentService(DepartmentModel);
+const suplierService = new SuplierService(SuplierModel);
 
 const container = {
     /**
@@ -59,6 +62,11 @@ const container = {
      * @type {DepartmentService}
      */
     DepartmentService: departmentService,
+
+    /**
+     * @type {SuplierService}
+     */
+    SuplierService: suplierService,
 
     filters: {
         Authenticated: AuthenticationFilter(),
