@@ -6,6 +6,7 @@ import { ProductRouter } from './routers/ProductRouter.js';
 import { UserRouter } from './routers/UserRouter.js';
 import { DepartmentRouter } from './routers/DepartmentRouter.js';
 import { SuplierRouter } from './routers/SuplierRouter.js';
+import { CostCenterRouter } from './routers/CostCenterRouter.js';
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/deposit", DepositRouter);
 app.use("/product-movement", ProductMovementRouter);
 app.use("/department", DepartmentRouter);
 app.use("/suplier", SuplierRouter);
+app.use("/cost-center", CostCenterRouter);
 
 app.listen(8080, () => {
   console.log("Started server at http://localhost:8080");

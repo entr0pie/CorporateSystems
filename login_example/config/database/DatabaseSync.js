@@ -4,6 +4,7 @@ import { DepositModel } from '../../models/DepositModel.js'
 import { ProductMovementModel } from '../../models/ProductMovementModel.js';
 import { DepartmentModel } from '../../models/DepartmentModel.js';
 import { SuplierModel } from '../../models/SuplierModel.js';
+import { CostCenterModel } from '../../models/CostCenterModel.js';
 
 export async function syncDatabaseModels() {
   await DepartmentModel.sync();
@@ -12,4 +13,5 @@ export async function syncDatabaseModels() {
   await DepositModel.sync();
   await ProductMovementModel.sync();
   await SuplierModel.sync();
+  await CostCenterModel.sync();
 }
