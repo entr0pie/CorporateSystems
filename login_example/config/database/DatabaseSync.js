@@ -7,6 +7,7 @@ import { SuplierModel } from '../../models/SuplierModel.js';
 import { CostCenterModel } from '../../models/CostCenterModel.js';
 import { PurchaseRequestModel } from '../../models/PurchaseRequestModel.js';
 import { QuotationModel } from '../../models/QuotationModel.js';
+import { PurchaseModel } from '../../models/PurchaseModel.js';
 
 export async function syncDatabaseModels() {
   await DepartmentModel.sync();
@@ -18,4 +19,5 @@ export async function syncDatabaseModels() {
   await CostCenterModel.sync();
   await PurchaseRequestModel.sync();
   await QuotationModel.sync();
+  await PurchaseModel.sync();
 }

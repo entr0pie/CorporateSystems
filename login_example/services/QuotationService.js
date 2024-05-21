@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { QuotationModel } from "../models/QuotationModel.js";
 
 export class QuotationService {
@@ -25,6 +26,17 @@ export class QuotationService {
             date,
             costCenterId,
             expirationDate,
+        });
+    }
+
+    async findQuotationsByProductId(productId) {
+        return await this.quotationModel.findAll({
+            where: {
+                productId,
+                expirationDate: {
+                    [Op.gt]: new Date()
+                }
+            }
         });
     }
 

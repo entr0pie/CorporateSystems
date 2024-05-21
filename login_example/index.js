@@ -9,6 +9,7 @@ import { SuplierRouter } from './routers/SuplierRouter.js';
 import { CostCenterRouter } from './routers/CostCenterRouter.js';
 import { PurchaseRequestRouter } from './routers/PurchaseRequestRouter.js';
 import { QuotationRouter } from './routers/QuotationRouter.js';
+import { PurchaseRouter } from './routers/PurchaseRouter.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/suplier", SuplierRouter);
 app.use("/cost-center", CostCenterRouter);
 app.use("/purchase-request", PurchaseRequestRouter);
 app.use("/quotation", QuotationRouter);
+app.use("/purchase", PurchaseRouter);
 
 app.listen(8080, () => {
   console.log("Started server at http://localhost:8080");

@@ -5,6 +5,8 @@ import { ProductService } from './ProductService.js';
 import { UserService } from './UserService.js';
 import { CostCenterService } from './CostCenterService.js';
 import { UserAuthentication } from '../security/authentication/UserAuthentication.js';
+import { PurchaseService } from './PurchaseService.js';
+import { QuotationService } from './QuotationService.js';
 
 export class PurchaseRequestService {
 
@@ -13,13 +15,17 @@ export class PurchaseRequestService {
      * @param {ProductService} productService
      * @param {UserService} userService
      * @param {CostCenterService} costCenterService
+     * @param {PurchaseService} purchaseService
+     * @param {QuotationService} quotationService
      * @param {PurchaseRequestModel} purchaseRequestModel 
      */
-    constructor(productMovementService, productService, userService, costCenterService, purchaseRequestModel) {
+    constructor(productMovementService, productService, userService, costCenterService, purchaseService, quotationService, purchaseRequestModel) {
         this.productMovementService = productMovementService;
         this.productService = productService;
         this.userService = userService;
         this.costCenterService = costCenterService;
+        this.purchaseService = purchaseService;
+        this.quotationService = quotationService;
         this.purchaseRequestModel = purchaseRequestModel;
     }
 
@@ -66,6 +72,27 @@ export class PurchaseRequestService {
                 await this.productMovementService.create(deposit.depositId, productId, "OUT", deposit.quantity, mediumPrice, new Date());
                 remainingQuantity -= deposit.quantity;
             }
+        } else {
+            const quotations = await this.quotationService.findQuotationsByProductId(productId);
+
+            if (quotations.length < 3) {
+                throw new Error("There is no quotation available for this product");
+            }
+
+
+            const worstQuotation = quotations.reduce((max, quotation) => max.price > quotation.price ? max : quotation);
+
+            let minPrice = worstQuotation.price;
+            let bestQuotation = null;
+
+            for (let quotation of quotations) {
+                if (quotation.price < minPrice) {
+                    minPrice = quotation.price;
+                    bestQuotation = quotation;
+                }
+            }
+
+            await this.purchaseService.create(bestQuotation.suplierId, bestQuotation.id, productId, quantity, minPrice, "PENDING");
         }
 
         const purchaseRequest = await this.purchaseRequestModel.create({
@@ -87,6 +114,7 @@ export class PurchaseRequestService {
         if (!purchaseRequest) {
             throw new Error("Purchase Request not found");
         }
+
         return purchaseRequest;
     }
 

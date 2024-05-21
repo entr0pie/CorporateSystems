@@ -22,6 +22,8 @@ import { PurchaseRequestService } from "../services/PurchaseRequestService.js";
 import { PurchaseRequestModel } from "../models/PurchaseRequestModel.js";
 import { QuotationService } from "../services/QuotationService.js";
 import { QuotationModel } from "../models/QuotationModel.js";
+import { PurchaseModel } from "../models/PurchaseModel.js";
+import { PurchaseService } from "../services/PurchaseService.js";
 
 const passwordManager = new BcryptPasswordManager(env.BCRYPT_SALT_ROUNDS);
 const authenticationManager = new JwtManager(env.JWT_SECRET);
@@ -32,8 +34,9 @@ const productMovementService = new ProductMovementService(ProductMovementModel);
 const departmentService = new DepartmentService(DepartmentModel);
 const suplierService = new SuplierService(SuplierModel);
 const costCenterService = new CostCenterService(CostCenterModel);
-const purchaseRequestService = new PurchaseRequestService(productMovementService, productService, userService, costCenterService, PurchaseRequestModel);
 const quotationService = new QuotationService(QuotationModel);
+const purchaseService = new PurchaseService(productMovementService, depositService, PurchaseModel);
+const purchaseRequestService = new PurchaseRequestService(productMovementService, productService, userService, costCenterService, purchaseService, quotationService, PurchaseRequestModel);
 
 const container = {
     /**
@@ -90,6 +93,11 @@ const container = {
      * @type {QuotationService}
      */
     QuotationService: quotationService,
+
+    /**
+     * @type {PurchaseService}
+     */
+    PurchaseService: purchaseService,
 
     filters: {
         Authenticated: AuthenticationFilter(),
