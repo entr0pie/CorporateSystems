@@ -12,8 +12,8 @@ export class ProductService {
     /**
      * @param {number} id 
      */
-    async getById(id) {
-        return await this.productModel.findByPk(id); 
+    async findById(id) {
+        return await this.productModel.findByPk(id);
     }
 
     /**
@@ -21,14 +21,14 @@ export class ProductService {
      * @param {string} description 
      * @param {boolean} isActive
      */
-    async create(name, description, isActive) {        
+    async create(name, description, isActive) {
         return await this.productModel.create({
             name: name,
             description: description,
             isActive: isActive
         });
     }
-    
+
     /**
      * @param {number} id
      * @param {string} name 
@@ -37,7 +37,7 @@ export class ProductService {
      */
     async update(id, name, description, isActive) {
         const product = await this.productModel.findByPk(id);
-        
+
         if (!product) {
             throw new Error("Product not found");
         }
@@ -56,7 +56,7 @@ export class ProductService {
      */
     async delete(id) {
         const product = await this.productModel.findByPk(id);
-        
+
         if (!product) {
             throw new Error("Product not found");
         }

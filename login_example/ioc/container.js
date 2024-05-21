@@ -18,6 +18,8 @@ import { SuplierModel } from "../models/SuplierModel.js";
 import { SuplierService } from "../services/SuplierService.js";
 import { CostCenterModel } from "../models/CostCenterModel.js";
 import { CostCenterService } from "../services/CostCenterService.js";
+import { PurchaseRequestService } from "../services/PurchaseRequestService.js";
+import { PurchaseRequestModel } from "../models/PurchaseRequestModel.js";
 
 const passwordManager = new BcryptPasswordManager(env.BCRYPT_SALT_ROUNDS);
 const authenticationManager = new JwtManager(env.JWT_SECRET);
@@ -28,6 +30,7 @@ const productMovementService = new ProductMovementService(ProductMovementModel);
 const departmentService = new DepartmentService(DepartmentModel);
 const suplierService = new SuplierService(SuplierModel);
 const costCenterService = new CostCenterService(CostCenterModel);
+const purchaseRequestService = new PurchaseRequestService(productMovementService, productService, userService, costCenterService, PurchaseRequestModel);
 
 const container = {
     /**
@@ -55,7 +58,6 @@ const container = {
      */
     DepositService: depositService,
 
-
     /**
      * @type {ProductMovementService}
      */
@@ -75,6 +77,11 @@ const container = {
      * @type {CostCenterService}
      */
     CostCenterService: costCenterService,
+
+    /**
+     * @type {PurchaseRequestService}
+     */
+    PurchaseRequestService: purchaseRequestService,
 
     filters: {
         Authenticated: AuthenticationFilter(),

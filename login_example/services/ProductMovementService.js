@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import { DepositModel } from '../models/DepositModel.js';
 import { ProductModel } from '../models/ProductModel.js';
+import { ProductMovementModel } from '../models/ProductMovementModel.js';
 
 export class ProductMovementService {
     /**
@@ -83,5 +84,77 @@ export class ProductMovementService {
             offset: offset,
             limit: size
         });
+    }
+
+    /**
+     * @param {number} productId
+     * @returns { {depositId: number, quantity: number}[] } quantity
+     */
+    async countAvailableProducts(productId) {
+        const outs = await this.productMovementModel.findAll({
+            where: {
+                productId: productId,
+                movementType: "OUT"
+            }
+        });
+
+        const ins = await this.productMovementModel.findAll({
+            where: {
+                productId: productId,
+                movementType: "IN"
+            }
+        });
+
+        const depositData = [];
+
+        for (let i = 0; i < ins.length; i++) {
+            const depositId = ins[i].depositId;
+            const quantity = ins[i].quantity;
+
+            if (depositData.find(d => d.depositId == depositId)) {
+                depositData.find(d => d.depositId == depositId).quantity += quantity;
+                continue;
+            }
+
+            depositData.push({ depositId: depositId, quantity: quantity });
+        }
+
+
+        for (let i = 0; i < outs.length; i++) {
+            const depositId = outs[i].depositId;
+            const quantity = outs[i].quantity;
+
+            if (depositData.find(d => d.depositId == depositId)) {
+                depositData.find(d => d.depositId == depositId).quantity -= quantity;
+                continue;
+            }
+
+            depositData.push({ depositId: depositId, quantity: -quantity });
+        }
+
+        return depositData;
+    }
+
+    /**
+     * @param {number} productId 
+     * @returns 
+     */
+    async calcMediumPrice(productId) {
+        const productMovements = await this.productMovementModel.findAll({
+            where: {
+                productId: productId
+            }
+        });
+
+        let totalQuantity = 0;
+        let totalValue = 0;
+
+        for (let i = 0; i < productMovements.length; i++) {
+            const productMovement = productMovements[i];
+            totalQuantity += productMovement.quantity;
+            totalValue += productMovement.quantity * productMovement.unitaryPrice;
+        }
+
+        return totalValue / totalQuantity;
     }
 }

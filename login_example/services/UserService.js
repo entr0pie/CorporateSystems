@@ -70,4 +70,24 @@ export class UserService {
         const offset = page * size;
         return await this.userModel.findAll({ limit: size, offset: offset });
     }
+
+    /**
+     * @param {string} email 
+     * @returns 
+     */
+    async findByEmail(email) {
+        return await this.userModel.findOne({
+            where: {
+                email: email
+            }
+        });
+    }
+
+    /**
+     * @param {number} id 
+     * @returns 
+     */
+    async findById(id) {
+        return await this.userModel.findByPk(id);
+    }
 }
