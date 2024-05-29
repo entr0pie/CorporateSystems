@@ -15,8 +15,8 @@ export class PurchaseService {
         this.purchaseModel = purchaseModel;
     }
 
-    async create(suplierId, quotationId, productId, quantity, unitaryPrice, status) {
-        return await this.purchaseModel.create({ suplierId, quotationId, productId, quantity, unitaryPrice, status });
+    async create(quotationId, productId, quantity, unitaryPrice, status) {
+        return await this.purchaseModel.create({ quotationId, productId, quantity, unitaryPrice, status });
     }
 
     async findById(id) {

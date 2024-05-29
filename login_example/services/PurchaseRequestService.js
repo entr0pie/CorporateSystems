@@ -92,7 +92,7 @@ export class PurchaseRequestService {
                 }
             }
 
-            await this.purchaseService.create(bestQuotation.suplierId, bestQuotation.id, productId, quantity, minPrice, "PENDING");
+            await this.purchaseService.create(bestQuotation.id, productId, quantity, minPrice, "PENDING");
         }
 
         const purchaseRequest = await this.purchaseRequestModel.create({
